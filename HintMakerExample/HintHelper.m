@@ -115,11 +115,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         NSString *icon = @"\u267C";
         UIFont *ft = [UIFont fontWithName:@"Arial" size:150.0];
         CGSize sz = [icon sizeWithFont:ft constrainedToSize:CGSizeMake(250, 1000)];
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(floorf(_vc.view.center.x - sz.width/2),
-                                                                    _vc.view.center.y - sz.height/2,
-                                                                    floorf(sz.width),
-                                                                    floorf(sz.height +10
-                                                                           ))] autorelease];
+        UILabel *label = EM_AUTORELEASE([[UILabel alloc] initWithFrame:CGRectMake(floorf(_vc.view.center.x - sz.width/2),
+                                                                                  _vc.view.center.y - sz.height/2,
+                                                                                  floorf(sz.width),
+                                                                                  floorf(sz.height +10
+                                                                                         ))]);
+        
         [label setBackgroundColor:[UIColor clearColor]];
         [label setTextAlignment:UITextAlignmentCenter];
         [label setFont:ft];   
@@ -146,10 +147,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return self;
 }
 
+#if __has_feature(objc_arc) != 1
 - (void)dealloc {
-    
     [modalState release];
     [super dealloc];
 }
-
+#endif
 @end

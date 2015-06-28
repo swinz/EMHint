@@ -50,11 +50,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 -(void)_addTap
 {
     UITapGestureRecognizer *tap = tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_onTap:)];
-    [_modalView addGestureRecognizer:tap]; 
+    [_modalView addGestureRecognizer:tap];
+#if __has_feature(objc_arc) != 1
     [tap release];
+#endif
 }
 
-#pragma mark ---------------------------------->> 
+#pragma mark ---------------------------------->>
 #pragma mark -------------->>PUBLIC
 -(void)clear
 {
@@ -65,7 +67,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 {
     return _modalView;
 }
--(void)presentModalMessage:(NSString*)message where:(UIView*)presentationPlace
+-(void)presentModalMessage:(NSString*)message with:(UIView*)presentationPlace
 {
     //incase we have many in a row
     if(_modalView!=nil)
@@ -118,7 +120,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         [label setNumberOfLines:0];
         [label setLineBreakMode:UILineBreakModeWordWrap];
         [_modalView addSubview:label];
+#if __has_feature(objc_arc) != 1
         [label release];
+#endif
     }
     
     if ([[self hintDelegate] respondsToSelector:@selector(hintStateHasDefaultTapGestureRecognizer:)]) {
@@ -135,8 +139,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 #pragma mark ---------------------------------->> 
 #pragma mark -------------->>cleanup
+#if __has_feature(objc_arc) != 1
+
 - (void)dealloc {
     [_modalView release];
     [super dealloc];
 }
+
+#endif
 @end

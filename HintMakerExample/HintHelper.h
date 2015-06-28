@@ -17,6 +17,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import "EMHint.h"
 #import "EMViewController.h"
 #define  kFirstMessage @"Spotlights to help lead your users...Tap along."
+
+
+#if __has_feature(objc_arc)
+#define EM_AUTORELEASE(exp) (exp)
+#else
+#define EM_AUTORELEASE(exp) [(exp) autorelease]
+#endif
+
+
+
 typedef enum
 {
     EMHintDialogTypeIntro,

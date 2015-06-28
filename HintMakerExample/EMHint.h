@@ -91,5 +91,5 @@ typedef enum
  // message is the message in the label
  // where is the view onto which the modal will overlay
  */
--(void)presentModalMessage:(NSString*)message where:(UIView*)presentationPlace;
+-(void)presentModalMessage:(NSString*)message with:(UIView*)presentationPlace;
 @end
